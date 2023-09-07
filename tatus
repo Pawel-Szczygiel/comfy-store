@@ -1,0 +1,24 @@
+[33mcommit 3e1452b88ec16b1abed40e34bb53dba3a61168c9[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Merge: dce2675 3c5d6ac
+Author: Paweł Szczygieł <pawel86szczygiel@gmail.com>
+Date:   Thu Sep 7 09:27:10 2023 +0200
+
+    Merge branch 'main' of https://github.com/Pawel-Szczygiel/comfy-store into main
+
+[33mcommit dce2675824ba4bf803d83190f140301b7b96878e[m
+Author: Paweł Szczygieł <pawel86szczygiel@gmail.com>
+Date:   Thu Sep 7 09:24:09 2023 +0200
+
+    changing dir of images
+
+[33mcommit 3c5d6acd90c2ceba232935d757332905a314e0ab[m
+Author: Pawel-Szczygiel <74866405+Pawel-Szczygiel@users.noreply.github.com>
+Date:   Tue Sep 5 23:53:08 2023 +0200
+
+    Create README.md
+
+[33mcommit 878f5c69617dcef61bef817f3cabee92247c14c4[m
+Author: Paweł Szczygieł <pawel86szczygiel@gmail.com>
+Date:   Tue Sep 5 23:51:45 2023 +0200
+
+    starting comfy store with clean js
