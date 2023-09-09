@@ -147,7 +147,14 @@ body {
 }
 
 .img-container:hover .bag-btn {
-  transform: translateX(0);
+  transform: translateX(0); 
+}
+.product {
+  transition: var(--mainTransition);
+}
+.product:hover{
+  box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.1), 2px 2px 30px rgba(0, 0, 0, 0.2);
+  
 }
 
 @keyframes shake-with-pause {
@@ -183,7 +190,7 @@ body {
 }
 
 .product h4 {
-  margin-top: 0.7rem;
+  margin: 0.7rem 0;
   letter-spacing: var(--mainSpacing);
   color: var(--primaryColor);
   text-align: center;

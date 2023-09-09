@@ -53,11 +53,34 @@ class UI{
         });
      
         productsCenterDom.innerHTML = result;
+    };
+
+    getBagButtons = () => {
+        const bagButtons = [...document.querySelectorAll('.bag-btn')];
+        bagButtons.forEach(btn => {
+            let id = btn.getAttribute('data-id');
+            let inCart = cart.find(item => item.id === id);
+            if(inCart) {
+                btn.innerText = 'In Cart';
+                btn.disabled = true;
+            } else {
+                btn.addEventListener('click', e => {
+                    const clickedBtn = e.target;
+                    clickedBtn.innerText = 'In Cart';
+                    clickedBtn.disabled = true;
+                    
+                })
+            } 
+
+        });
     }
+
 }
 
 class Storage{
-
+    static saveProducts = products => {
+        localStorage.setItem('products', JSON.stringify(products))
+    }
 }
 
 function start() {
@@ -65,7 +88,13 @@ function start() {
     const products = new Products();
 
     const data =  products.getProducts()    
-    data.then(products => ui.displayProducts(products));
+    data
+        .then(products => { 
+        ui.displayProducts(products) ;
+        Storage.saveProducts(products) })
+        .then(() => {
+            ui.getBagButtons()
+        } )
 }
 
 
