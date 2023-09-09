@@ -10,6 +10,7 @@ const cartContent = document.querySelector('.cart-content');
 const productsCenterDom = document.querySelector('.products-center');
 
 let cart = [];
+let buttonsDOM = [];
 
 class Products{
     getProducts = async () => {
@@ -57,20 +58,35 @@ class UI{
 
     getBagButtons = () => {
         const bagButtons = [...document.querySelectorAll('.bag-btn')];
+        buttonsDOM = bagButtons;
+        
         bagButtons.forEach(btn => {
             let id = btn.getAttribute('data-id');
             let inCart = cart.find(item => item.id === id);
             if(inCart) {
                 btn.innerText = 'In Cart';
                 btn.disabled = true;
-            } else {
-                btn.addEventListener('click', e => {
+            } 
+                
+            btn.addEventListener('click', e => {
                     const clickedBtn = e.target;
                     clickedBtn.innerText = 'In Cart';
                     clickedBtn.disabled = true;
+                    //!get product from local storage
+                    let cartItem = Storage.getProduct(id);
+                    //!add product to the cart
+                    cart = [...cart, {...cartItem, amount:1} ];
                     
+                    //!save cart in local storage
+                    Storage.saveToLocalStorage(cart,'cart');
+                    //! set cart items
+
+                    //! display cart item
+                    
+                    //! show the cart 
+
                 })
-            } 
+            
 
         });
     }
@@ -78,8 +94,14 @@ class UI{
 }
 
 class Storage{
-    static saveProducts = products => {
-        localStorage.setItem('products', JSON.stringify(products))
+    static saveToLocalStorage = (arr, thing) => {
+        localStorage.setItem(thing, JSON.stringify(arr));
+    }
+
+    static getProduct = lookingProductId => {
+        const products = JSON.parse( localStorage.getItem('products')); 
+        const product = products.find(product => product.id === lookingProductId);
+        return product;
     }
 }
 
@@ -91,7 +113,7 @@ function start() {
     data
         .then(products => { 
         ui.displayProducts(products) ;
-        Storage.saveProducts(products) })
+        Storage.saveToLocalStorage(products,'products') })
         .then(() => {
             ui.getBagButtons()
         } )
