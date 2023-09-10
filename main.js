@@ -132,9 +132,32 @@ class UI{
 
     displayCart = cart => cart.forEach(item => this.addCartItem(item));
 
-    cartLogic = () => {
-        
+    getSingleButton = id => buttonsDOM.find(btn => btn.dataset.id === id);
+
+    
+
+    removeItem = id => {
+        cart = cart.filter(item => item.id !== id);
+        this.setCartValues(cart);
+        Storage.saveToLocalStorage('cart', cart);
+        let button = this.getSingleButton(id);
+        button.disabled = false;
+        button.innerHTML = `<i class="fas fa-shopping-cart animation-cart"></i>
+        add to bag`;
     }
+
+    clearCart = () => {
+        const cartItemsId = cart.map(item => item.id);
+        cartItemsId.forEach(id => this.removeItem(id));
+        cartContent.innerHTML = '';
+    }
+
+    cartLogic = () => {
+        clearCartBtn.addEventListener('click', () => {
+            this.clearCart()
+        });
+    }
+
 
     setupApp = () => {
         cart = Storage.getCart('cart');
