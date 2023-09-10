@@ -272,6 +272,12 @@ body {
 .remove-item {
   color: grey;
   cursor: pointer;
+  letter-spacing: var(--mainSpacing);
+  transition: var(--mainTransition);
+}
+
+.remove-item:hover{
+  color: red;
 }
 .fa-chevron-up,
 .fa-chevron-down {

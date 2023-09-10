@@ -150,11 +150,19 @@ class UI{
         const cartItemsId = cart.map(item => item.id);
         cartItemsId.forEach(id => this.removeItem(id));
         cartContent.innerHTML = '';
+        this.hideCart();
     }
 
     cartLogic = () => {
         clearCartBtn.addEventListener('click', () => {
-            this.clearCart()
+            this.clearCart();
+        });
+        cartContent.addEventListener('click', e => {
+            const domElement = e.target;
+           if(domElement.classList.contains('remove-item')) {
+            this.removeItem(domElement.dataset.id);
+            domElement.closest('.cart-item').remove();
+           }
         });
     }
 
@@ -180,7 +188,6 @@ class Storage{
     }
 
     static getCart = key => JSON.parse(localStorage.getItem(key)) || [];
-
     static clearCart = key => localStorage.removeItem(key);
 }
 
