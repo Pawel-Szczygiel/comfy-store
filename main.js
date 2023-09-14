@@ -159,10 +159,33 @@ class UI{
         });
         cartContent.addEventListener('click', e => {
             const domElement = e.target;
-           if(domElement.classList.contains('remove-item')) {
-            this.removeItem(domElement.dataset.id);
-            domElement.closest('.cart-item').remove();
-           }
+        
+            if( domElement.classList.contains('remove-item') ) {
+                this.removeItem(domElement.dataset.id);
+                domElement.closest('.cart-item').remove();
+            }
+            else if( domElement.classList.contains('fa-chevron-up') ) {
+                const productId = domElement.dataset.id;
+                let findItem = cart.find(item => item.id === productId);
+                
+                findItem.amount += 1;
+                Storage.saveToLocalStorage('cart', cart);
+                this.setCartValues(cart);
+                domElement.nextElementSibling.innerText = findItem.amount;
+            }   
+            else if( domElement.classList.contains('fa-chevron-down') ) {
+                const productId = domElement.dataset.id;
+                let findItem = cart.find(item => item.id === productId);
+                
+                findItem.amount -= 1;
+                if (findItem.amount < 1) {
+                    this.removeItem(productId);
+                    domElement.closest('.cart-item').remove();
+                }
+                Storage.saveToLocalStorage('cart', cart);
+                this.setCartValues(cart);
+                domElement.previousElementSibling.innerHTML = findItem.amount;
+            }   
         });
     }
 
